@@ -56,9 +56,14 @@ class ANT(nn.Module):
         return batch
 
     def calibrate(self,mu,sig):
+        '''
+        For ImageNet we use mu_hat = mu/c
+        For CIFAR10/100 we use mu_hat = mu/(1+exp(c))
+        '''
         c = torch.mean(sig,1)
         c = c.unsqueeze(1).expand(mu.shape)
         return torch.div(mu,1+torch.exp(c))
+        # return torch.div(mu,c)
 
     def forward(self,x,anchors=None,corrupt=False,n_anchors=1,return_std=False):
         if n_anchors==1 and return_std:
@@ -93,7 +98,7 @@ if __name__=='__main__':
     pred = model(inputs)
 
     ## returns std dev of predictions
-    pred1,unc1 = model(inputs,anchors=None,n_anchors=5,return_std=True)
+    pred1,unc1 = model(inputs,n_anchors=5,return_std=True)
 
     ## returns std dev of predictions for specified anchors
     pred2,unc2 = model(inputs,anchors=anchors,n_anchors=5,return_std=True)
