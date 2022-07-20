@@ -60,7 +60,7 @@ if __name__ == '__main__':
     args = parser.parse_args()
     cfg_path = args.cfg_path
     log_path = args.log_path
-    log_path = f'{log_path}/{args.nn}/{args.in_dataset}/'
+    # log_path = f'{log_path}/{args.in_dataset}/{args.nn}/'
     logfile = f'{log_path}/{args.out_dataset}_{datetime.datetime.now().strftime("%Y-%m-%d-%H-%M-%S")}.log'
 
     if not os.path.exists(log_path):

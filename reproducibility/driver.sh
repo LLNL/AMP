@@ -6,6 +6,8 @@
 #SBATCH --output=./slurm_logs/ipa_%x-%j.out
 
 source ~/.bashrc
+conda activate py37
+
 cd ../
 srun python -u main.py \
           --in_dataset $1 \

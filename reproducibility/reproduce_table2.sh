@@ -1,5 +1,6 @@
 #!/bin/bash
 logdir=Table2
+mkdir $logdir
 mkdir $logdir/cifar10
 mkdir $logdir/cifar100
 
