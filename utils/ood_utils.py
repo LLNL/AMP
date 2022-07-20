@@ -3,6 +3,8 @@ import torch.nn as nn
 import torch.nn.functional as F
 import numpy as np
 
+__all__=['entropy','ood_score']
+
 def entropy(prob):
     """
     Compute the entropy of the mean of the predictive distribution

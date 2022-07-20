@@ -1,7 +1,8 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from models import MODEL_DICT
+from .models import MODEL_DICT
+__all__=['fetch_model','display_log']
 
 def fetch_model(args):
     modeltype = args.nn

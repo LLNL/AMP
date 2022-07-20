@@ -13,6 +13,6 @@ srun python -u main.py \
           --out_dataset $2  \
           --nn $3 \
           --log_path $4 \
-          --cfg_path ./reproduce_config.yml
+          --cfg_path reproducibility/reproduce_config.yml
 
 cd reproducibility

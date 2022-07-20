@@ -15,6 +15,8 @@ import matplotlib
 # matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
+__all__=['compute_metric']
+
 def compute_metric(known, novel):
     stype = ""
 
