@@ -1,6 +1,7 @@
 import torch.nn as nn
 import torchvision.transforms as transforms
 import torch
+import numpy as np
 
 class ANT(nn.Module):
     def __init__(self,base_network):
@@ -40,11 +41,13 @@ class ANT(nn.Module):
             n_anchors is chosen as min(n_batch,n_anchors)
         '''
         n_img = x.shape[0]
-        if anchors is None:
-            anchors = x[torch.randperm(n_img),:,:,:]
+        # if anchors is None:
+            # anchors = x[torch.randperm(n_img),:,:,:]
 
         ## make anchors (n_anchors) --> n_img*n_anchors
-        A = torch.repeat_interleave(anchors[:n_anchors,:],n_img,dim=0)
+        ids = np.random.choice(anchors.shape[0],n_anchors, replace=False)
+
+        A = torch.repeat_interleave(anchors[ids,:,:,:],n_img,dim=0)
 
         if corrupt:
             refs = self.txs(A)
@@ -69,7 +72,7 @@ class ANT(nn.Module):
         if n_anchors==1 and return_std:
             raise Warning('Use n_anchor>1, std. dev cannot be computed!')
 
-        n_anchors = min(x.shape[0],n_anchors)
+        # n_anchors = min(x.shape[0],n_anchors)
         a_batch = self.process_batch(x,anchors=anchors,corrupt=corrupt,n_anchors=n_anchors)
 
         p = self.net(a_batch)
@@ -78,7 +81,6 @@ class ANT(nn.Module):
 
         if return_std:
             std = p.sigmoid().std(0)
-
             return self.calibrate(mu,std), std
         else:
             return mu
