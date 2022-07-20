@@ -11,7 +11,7 @@ import yaml
 import logging
 
 from utils import display_log
-import compute_AMPScore as ood
+import AMPScore as ood
 
 
 
