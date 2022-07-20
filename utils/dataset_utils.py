@@ -18,7 +18,9 @@ import numpy as np
 from PIL import Image
 import natsort
 import random
-# from scood_data import utils as scood
+from .scood_data import utils as scood
+from functools import partial
+
 __all__=['fetch_dataloaders']
 
 data_transforms = transforms.Compose([

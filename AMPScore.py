@@ -158,7 +158,7 @@ def run_ood(**kwargs):
         oods = [uncs_svhn0, uncs_svhn1, uncs_svhn2]
 
         scood_iid = np.concatenate([iids[1],oods[1][np.where(sclabel1==1)]],0)
-        scood_ood = oods[i][np.where(sclabel1==0)]
+        scood_ood = oods[1][np.where(sclabel1==0)]
         logger.debug(scood_iid.shape, scood_ood.shape)
         results  = compute_metric(-scood_iid, -scood_ood)
 
