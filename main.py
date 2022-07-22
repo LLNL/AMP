@@ -60,11 +60,11 @@ if __name__ == '__main__':
     args = parser.parse_args()
     cfg_path = args.cfg_path
     log_path = args.log_path
-    # log_path = f'{log_path}/{args.in_dataset}/{args.nn}/'
+    log_path = f'{log_path}/{args.in_dataset}/{args.nn}/'
     logfile = f'{log_path}/{args.out_dataset}_{datetime.datetime.now().strftime("%Y-%m-%d-%H-%M-%S")}.log'
 
     if not os.path.exists(log_path):
-        os.makedirs(log_path)
+        os.makedirs(log_path,exist_ok = True)
 
     if args.debug:
         loglevel = logging.DEBUG

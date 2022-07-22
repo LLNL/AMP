@@ -30,8 +30,6 @@ def run_ood(**kwargs):
 
     ckpt_folder = cfg['models']['ckpt_save']
     model_name = cfg['models']['model_name']
-
-
     ckpt_path = f'./{ckpt_folder}/{in_dataset}/{modelname}/{model_name}'
     ckpt_files = glob.glob(ckpt_path)
     logger.debug(f'Reading model weights from {ckpt_path}')
