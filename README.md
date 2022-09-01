@@ -1,7 +1,7 @@
 # AMP
 Code and models for _Out of Distribution Detection with Neural Network Anchoring_ **(Available soon)**
-![Heteroscedastic temperature scaling with neural network anchoring](figs/amp_teaser.png)
-
+<!-- ![Heteroscedastic temperature scaling with neural network anchoring](figs/amp_teaser.png) -->
+<img src=figs/amp_teaser.png width="800">
 
 ### Dependencies
 This package was built and tested using
@@ -18,7 +18,8 @@ Pre-trained (cifar10/100: ResNet34, WRN) to reproduce experiments from the paper
 
 ### LSUN Resizing Benchmark
 We provide a new benchmark to test OOD robutness to resizing artifacts. This can be found in  `resize_ood/resize_benchmark.tar.gz`. To use it, extract the dataset from the zipped files and point to them in the `config.yml` file.
-![Heteroscedastic temperature scaling with neural network anchoring](figs/table7.png)
+<img src=figs/table7.png width="650">
+
 
 ### Software Citation
 If you use this code, please consider citing our paper as follows:
