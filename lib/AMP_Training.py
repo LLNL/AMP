@@ -1,7 +1,7 @@
 '''Train CIFAR10 with PyTorch.'''
 
-from models import *
-from models.resnetv2 import resnet20
+from .utils.models import *
+from .utils.models.resnetv2 import resnet20
 from AnchoringModel import ANT
 
 import torch
