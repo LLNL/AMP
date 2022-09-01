@@ -1,6 +1,5 @@
 # AMP
-Code and models for _Out of Distribution Detection with Neural Network Anchoring_ **(Available soon)**
-<!-- ![Heteroscedastic temperature scaling with neural network anchoring](figs/amp_teaser.png) -->
+Code and models for _Out of Distribution Detection with Neural Network Anchoring_
 <img src=figs/teaser.png width="800">
 
 ### Dependencies
@@ -17,7 +16,7 @@ All of these can be installed (recommend a custom environment) using `pip instal
 Pre-trained (cifar10/100: ResNet34, WRN) to reproduce experiments from the paper can be downloaded from the [Google Drive Link](https://drive.google.com/drive/folders/1Pdh693qjUsF_BUtfIQtKpV-QNVyVEA_H)
 
 ### LSUN Resizing Benchmark
-We provide a new benchmark to test OOD robutness to resizing artifacts. This can be found in  `resize_ood/resize_benchmark.tar.gz`. To use it, extract the dataset from the zipped files and point to them in the `config.yml` file.
+We provide a new benchmark to test OOD robutness to resizing artifacts. This can be found in  `[resize_ood/resize_benchmark.tar.gz](https://github.com/rushilanirudh/AMP_/tree/main/resize_ood)`. To use it, extract the dataset from the zipped files and point to them in the `config.yml` file.
 <img src=figs/table7.png width="750">
 
 
