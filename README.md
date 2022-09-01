@@ -22,7 +22,7 @@ from .utils.models import ResNet34 #import any CNN model to train
 from AnchoringModel import ANT
 
 net = ResNet34(nc=6,num_classes=10) #only modification is input has 2x channels as usual, so nc = 6.
-anchored_net = ANT(net)
+anchored_net = ANT(net) #everything else remains unchanged
 ...
 preds = anchored_net(images)
 loss = criterion(labels,preds)
