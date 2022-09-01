@@ -16,7 +16,7 @@ All of these can be installed (recommend a custom environment) using `pip instal
 Pre-trained (cifar10/100: ResNet34, WRN) to reproduce experiments from the paper can be downloaded from the [Google Drive Link](https://drive.google.com/drive/folders/1Pdh693qjUsF_BUtfIQtKpV-QNVyVEA_H)
 
 ### LSUN Resizing Benchmark
-We provide a new benchmark to test OOD robutness to resizing artifacts. This can be found in  `[resize_ood/resize_benchmark.tar.gz](https://github.com/rushilanirudh/AMP_/tree/main/resize_ood)`. To use it, extract the dataset from the zipped files and point to them in the `config.yml` file.
+We provide a new benchmark to test OOD robutness to resizing artifacts. This can be found in  [resize_ood/resize_benchmark.tar.gz](https://github.com/rushilanirudh/AMP_/tree/main/resize_ood). To use it, extract the dataset from the zipped files and point to them in the `config.yml` file.
 <img src=figs/table7.png width="750">
 
 
