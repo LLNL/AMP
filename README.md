@@ -12,7 +12,7 @@ For logging and Config files we use yaml (`5.4.1`) and logging (`0.5.1.2`).
 All of these can be installed (recommend a custom environment) using `pip install -r requirements.txt`.
 
 ### Checkpoints and pre-trained models
-Pre-trained (cifar10/100: ResNet34, WRN) to reproduce experiments from the paper can be downloaded from the [Google Drive Link](https://drive.google.com/drive/folders/1Pdh693qjUsF_BUtfIQtKpV-QNVyVEA_H). The code assumes checkpoints are placed as follows: `ckpt_save/in_dataset/modeltype_seed/model_name` so for example, `ckpts/cifar100/WideResNet_seed_1/ckpt-199.pth`. The tarball containing checkpoints already preserves this directory structure, and its location must be specified in the `config.yml` before evaluating.
+Pre-trained (`cifar10/100: ResNet34, WRN`) to reproduce experiments from the paper can be downloaded from the [Google Drive Link](https://drive.google.com/drive/folders/1Pdh693qjUsF_BUtfIQtKpV-QNVyVEA_H). The code assumes checkpoints are placed as follows: `ckpt_save/in_dataset/modeltype_seed/model_name` so for example, `ckpts/cifar100/WideResNet_seed_1/ckpt-199.pth`. The tarball containing checkpoints already preserves this directory structure, and its location must be specified in the `config.yml` before evaluating.
 
 
 ### Training your own anchored model
