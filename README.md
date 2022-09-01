@@ -1,7 +1,7 @@
 # AMP
 Code and models for _Out of Distribution Detection with Neural Network Anchoring_ **(Available soon)**
 <!-- ![Heteroscedastic temperature scaling with neural network anchoring](figs/amp_teaser.png) -->
-<img src=figs/amp_teaser.png width="800">
+<img src=figs/teaser.png width="800">
 
 ### Dependencies
 This package was built and tested using
