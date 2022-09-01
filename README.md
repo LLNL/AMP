@@ -13,14 +13,16 @@ All of these can be installed (recommend a custom environment) using `pip instal
 
 
 ### Checkpoints and pre-trained models
-Pre-trained (cifar10/100: ResNet34, WRN) to reproduce experiments from the paper can be downloaded from the [Google Drive Link](https://drive.google.com/drive/folders/1Pdh693qjUsF_BUtfIQtKpV-QNVyVEA_H)
+Pre-trained (cifar10/100: ResNet34, WRN) to reproduce experiments from the paper can be downloaded from the [Google Drive Link](https://drive.google.com/drive/folders/1Pdh693qjUsF_BUtfIQtKpV-QNVyVEA_H). The code assumes checkpoints are placed as follows: `ckpt_save/in_dataset/modeltype_seed/model_name` so for example, `ckpts/cifar100/WideResNet_seed_1/ckpt-199.pth`. The tarball containing checkpoints already preserves this directory structure, and its location must be specified in the `config.yml` before evaluating.
 
 ### LSUN Resizing Benchmark
 We provide a new benchmark to test OOD robutness to resizing artifacts. This can be found in  [`resize_ood/resize_benchmark.tar.gz`](resize_ood/). To use it, extract the dataset from the tarball and point to them in the `config.yml` file, before executing the `main.py`.
 <img src=figs/table7.png width="750">
 
+### Reproducibility
+We provide easy bash scripts to reproduce different tables/figures in the paper. These can be found and executed in [`reproducibility/`](reproducibility/). These depend on the pre-trained checkpoints provided, so they must first be downloaded. We also provide a separate config file with the exact settings used for our experiments.
 
-### Software Citation
+### Citation
 If you use this code, please consider citing our paper as follows:
 ```
 @article{anirudh2022out,
