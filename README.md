@@ -18,7 +18,7 @@ Pre-trained (cifar10/100: ResNet34, WRN) to reproduce experiments from the paper
 ### Training your own anchored model
 Converting an existing network to work with anchoring is very easy and can be done as follows:
 ```
-from .utils.models import ResNet34
+from .utils.models import ResNet34 #import any CNN model to train
 from AnchoringModel import ANT
 
 net = ResNet34(nc=6,num_classes=10) #only modification is input has 2x channels as usual, so nc = 6.
