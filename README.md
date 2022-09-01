@@ -1,5 +1,5 @@
 # AMP
-Code and models for _Out of Distribution Detection with Neural Network Anchoring_
+Code and models for [`Out of Distribution Detection with Neural Network Anchoring`](https://arxiv.org/abs/2207.04125)
 <img src=figs/teaser.png width="800">
 
 ### Dependencies
