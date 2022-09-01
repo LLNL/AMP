@@ -1,5 +1,5 @@
 ### LSUN Resizing Benchmark
-We provide a new benchmark to test OOD robutness to resizing artifacts. This can be found in xx/xx/
+We provide a new benchmark to test OOD robustness to resizing artifacts. Each resizing method contains `10000` images from the original LSUN dataset resized using a different interpolation scheme. We also provide the script in [`create_dataset.py`](create_dataset.py) that was used to create the dataset for future research.
 
 ### License
 This is a modification of the original LSUN dataset [[original website]](https://www.yf.io/p/lsun), and can be downloaded from [[LSUN_SCENE_URL]](http://dl.yf.io/lsun/scenes/%s_%s_lmdb.zip). In particular, we modify the copy of LSUN obtained from the [[SCOOD github repository]](https://github.com/Jingkang50/ICCV21_SCOOD) as part of their code release.
@@ -15,5 +15,5 @@ We attribute the same license to this benchmark containing the processed LSUN as
 }
 ```
 
-### Processing
-We process the original LSUN images to be the same size as CIFAR-10/100 datasets (32x32x3). We evaluate different resizing techniques using the Pillow Imaging Library ([https://python-pillow.org/](https://python-pillow.org/)).
+### Creating the dataset
+We resize the original LSUN images to be the same size as CIFAR-10/100 datasets (32x32x3) using four resizing techniques: `nearest, bilinear, bicubic,lanczos` using the Pillow Imaging Library ([https://python-pillow.org/](https://python-pillow.org/)).
