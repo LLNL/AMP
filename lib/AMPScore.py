@@ -4,8 +4,8 @@ import glob
 import pickle as pkl
 import random
 
-from utils import *
-from AnchoringModel import ANT
+from .utils import *
+from .AnchoringModel import ANT
 
 def run_ood(**kwargs):
     args = kwargs['args']

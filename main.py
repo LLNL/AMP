@@ -14,8 +14,8 @@ import random
 import yaml
 import logging
 
-from utils import display_log
-import AMPScore as ood
+from lib.utils import display_log
+import lib.AMPScore as ood
 
 
 

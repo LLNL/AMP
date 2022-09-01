@@ -41,13 +41,15 @@ class ANT(nn.Module):
             n_anchors is chosen as min(n_batch,n_anchors)
         '''
         n_img = x.shape[0]
-        # if anchors is None:
-            # anchors = x[torch.randperm(n_img),:,:,:]
+        if anchors is None:
+            anchors = x[torch.randperm(n_img),:,:,:]
 
         ## make anchors (n_anchors) --> n_img*n_anchors
         ids = np.random.choice(anchors.shape[0],n_anchors, replace=False)
-
         A = torch.repeat_interleave(anchors[ids,:,:,:],n_img,dim=0)
+
+        # alternatively you can just randomly sample the batch as below:
+        # A = anchors[torch.randint(anchors.shape[0],(n_img*n_anchors,)),:]
 
         if corrupt:
             refs = self.txs(A)
