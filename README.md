@@ -18,7 +18,7 @@ Pre-trained (cifar10/100: ResNet34, WRN) to reproduce experiments from the paper
 
 ### LSUN Resizing Benchmark
 We provide a new benchmark to test OOD robutness to resizing artifacts. This can be found in  `resize_ood/resize_benchmark.tar.gz`. To use it, extract the dataset from the zipped files and point to them in the `config.yml` file.
-<img src=figs/table7.png width="650">
+<img src=figs/table7.png width="750">
 
 
 ### Software Citation
