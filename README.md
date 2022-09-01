@@ -12,7 +12,7 @@ For logging and Config files we use yaml (`5.4.1`) and logging (`0.5.1.2`).
 All of these can be installed (recommend a custom environment) using `pip install -r requirements.txt`.
 
 ### Checkpoints and pre-trained models
-Pre-trained (`cifar10/100: ResNet34, WRN`) to reproduce experiments from the paper can be downloaded from the [Google Drive Link](https://drive.google.com/drive/folders/1Pdh693qjUsF_BUtfIQtKpV-QNVyVEA_H). The code assumes checkpoints are placed as follows: `ckpt_save/in_dataset/modeltype_seed/model_name` so for example, `ckpts/cifar100/WideResNet_seed_1/ckpt-199.pth`. The tarball containing checkpoints already preserves this directory structure, and its location must be specified in the `config.yml` before evaluating.
+Pre-trained (`cifar10/100: ResNet34, WRN`) to reproduce experiments from the paper can be downloaded from the [Google Drive Link](https://drive.google.com/drive/folders/1Pdh693qjUsF_BUtfIQtKpV-QNVyVEA_H). The code assumes checkpoints are placed as follows: `ckpt_save/in_dataset/modeltype_seed/model_name` so for example, `ckpts/cifar100/WideResNet_seed_1/ckpt-199.pth`. The tarball containing checkpoints already preserves this directory structure, and its location must be specified in the `config.yml` before evaluating. We will release the ImageNet checkpoint shortly!
 
 
 ### Training your own anchored model
@@ -41,6 +41,7 @@ We provide a new benchmark to test OOD robutness to resizing artifacts. This can
 
 ### Reproducibility
 We provide easy bash scripts to reproduce different tables/figures in the paper. These can be found and executed in [`reproducibility/`](reproducibility/). These depend on the pre-trained checkpoints provided, so they must first be downloaded. We also provide a separate config file with the exact settings used for our experiments.
+
 
 ### Citation
 If you use this code, please consider citing our paper as follows:
