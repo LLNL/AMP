@@ -1,7 +1,6 @@
 '''Train CIFAR10 with PyTorch.'''
 
 from .utils.models import *
-from .utils.models.resnetv2 import resnet20
 from AnchoringModel import ANT
 
 import torch
@@ -25,6 +24,7 @@ def encode(inps, anchs):
     return inps - anchs
 
 
+CIFAR_PATH = '../CIFAR/pytorch-cifar/data/'
 
 def run_training(datasettype='cifar10',modeltype='resnet18',pretrained_base=False,seed=0,resume=False):
     ''' set random seed '''
@@ -46,8 +46,7 @@ def run_training(datasettype='cifar10',modeltype='resnet18',pretrained_base=Fals
     max_epochs = 200
 
 
-    logname = f'seed_{seed}_txs5_ANT_API_{datetime.datetime.now().strftime("%Y-%m-%d-%H-%M-%S")}'
-    # writer = SummaryWriter(f'./logs_jun2022/logs_{modeltype}/{logname}')
+    logname = f'AMP_{datetime.datetime.now().strftime("%Y-%m-%d-%H-%M-%S")}'
 
     device = 'cuda' if torch.cuda.is_available() else 'cpu'
     best_acc = 0  # best test accuracy
@@ -74,12 +73,12 @@ def run_training(datasettype='cifar10',modeltype='resnet18',pretrained_base=Fals
         ])
 
         trainset = torchvision.datasets.CIFAR10(
-            root='../CIFAR/pytorch-cifar/data/', train=True, download=True, transform=transform_train)
+            root=CIFAR_PATH, train=True, download=False, transform=transform_train)
         trainloader = torch.utils.data.DataLoader(
             trainset, batch_size=128, shuffle=True, num_workers=2)
 
         testset = torchvision.datasets.CIFAR10(
-            root='../CIFAR/pytorch-cifar/data/', train=False, download=True, transform=transform_test)
+            root=CIFAR_PATH, train=False, download=False, transform=transform_test)
         testloader = torch.utils.data.DataLoader(
             testset, batch_size=100, shuffle=False, num_workers=2)
     elif datasettype =='cifar100':
@@ -92,32 +91,12 @@ def run_training(datasettype='cifar10',modeltype='resnet18',pretrained_base=Fals
 
 
     print('==> Building model..')
-
-    if modeltype=='resnet20':
-        net = resnet20(nc=6,num_classes=nclass)
-        modelname = 'ResNet20'
-
-    elif modeltype=='resnet18':
-        net = ResNet18(nc=6,num_classes=nclass)
-        modelname = 'ResNet18'
-    elif modeltype=='resnet34':
+    if modeltype=='resnet34':
         net = ResNet34(nc=6,num_classes=nclass)
         modelname = 'ResNet34'
     elif modeltype=='wideresnet':
         net = WideResNet(nc=6,num_classes=nclass)
         modelname = 'WideResNet'
-
-    elif modeltype=='wideresnet28':
-        modelname = 'WideResNet28'
-        net = WideResNet28(nc_in=6,num_classes=nclass)
-
-    elif modeltype=='wideresnetv2':
-        modelname = 'WideResNet'
-        net = delUQNetv2(nc=6,num_classes = nclass)
-    elif modeltype=='resnet18v2':
-        modelname = 'ResNet18'
-        net = delUQNetv2(modeltype,nc=6,num_classes = nclass)
-
 
     net = ANT(base_network=net)
     modelname = modelname + f'_seed_{seed}'
@@ -126,6 +105,7 @@ def run_training(datasettype='cifar10',modeltype='resnet18',pretrained_base=Fals
     if not os.path.isdir(modelpath):
         os.makedirs(modelpath)
     _self_filename = sys.argv[0]
+    ## freeze a copy of the training file for the record
     copyfile(_self_filename,modelpath+'/exec_script.py')
 
     net = net.to(device)
@@ -134,15 +114,11 @@ def run_training(datasettype='cifar10',modeltype='resnet18',pretrained_base=Fals
         cudnn.benchmark = True
 
     criterion = nn.CrossEntropyLoss()
-    if not pretrained_base:
-        optimizer = optim.SGD(net.parameters(), lr=0.1,
-                          momentum=0.9, weight_decay=5e-4)
-                          # scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=200)
-        scheduler = optim.lr_scheduler.MultiStepLR(optimizer, milestones= [60, 120, 160], gamma=0.2) #learning rate decay
-    else:
-        optimizer = optim.SGD(net.parameters(), lr=5e-2,
-                          momentum=0.9, weight_decay=1e-4)
-        scheduler = optim.lr_scheduler.MultiStepLR(optimizer, milestones= [10,20,30,40], gamma=0.2) #learning rate decay
+
+    optimizer = optim.SGD(net.parameters(), lr=0.1,
+                      momentum=0.9, weight_decay=5e-4)
+                      # scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=200)
+    scheduler = optim.lr_scheduler.MultiStepLR(optimizer, milestones= [60, 120, 160], gamma=0.2) #learning rate decay
 
 
     # Training
@@ -153,7 +129,7 @@ def run_training(datasettype='cifar10',modeltype='resnet18',pretrained_base=Fals
         con_loss = 0
         correct = 0
         total = 0
-        total_con_loss = 0.
+
         for batch_idx, (inputs, targets) in enumerate(trainloader):
             inputs, targets = inputs.to(device), targets.to(device)
 
@@ -162,27 +138,18 @@ def run_training(datasettype='cifar10',modeltype='resnet18',pretrained_base=Fals
             corrupt = batch_idx%5==0
             outputs = net(inputs,corrupt=corrupt)
 
-            ce_loss = criterion(outputs, targets)
-
-            con_loss = 0
-            loss = ce_loss #- 5e-3*con_loss
+            loss = criterion(outputs, targets)
             loss.backward()
             optimizer.step()
 
-            train_loss += ce_loss.item()
-            total_con_loss += 0
+            train_loss += loss.item()
             _, predicted = outputs.max(1)
             total += targets.size(0)
             correct += predicted.eq(targets).sum().item()
 
             if batch_idx %100==0:
 
-                print(f'Epoch# {epoch}, Batch# {batch_idx}, Loss: {train_loss/(batch_idx+1):.3f}, Acc: {100.*correct/total:.3f}, KL Loss: {total_con_loss/(batch_idx+1):.3f}')
-
-        # writer.add_scalar('Loss/train', train_loss/(batch_idx+1), epoch)
-        # writer.add_scalar('Accuracy/train', 100.*correct/total, epoch)
-        # writer.add_scalar('Loss/KL',total_con_loss/(batch_idx+1),epoch)
-
+                print(f'Epoch# {epoch}, Batch# {batch_idx}, Loss: {train_loss/(batch_idx+1):.3f}, Acc: {100.*correct/total:.3f}')
 
     def test(epoch,best_acc):
         net.eval()
@@ -200,8 +167,6 @@ def run_training(datasettype='cifar10',modeltype='resnet18',pretrained_base=Fals
                 total += targets.size(0)
                 correct += predicted.eq(targets).sum().item()
 
-        # writer.add_scalar('Loss/test', test_loss/(batch_idx+1), epoch)
-        # writer.add_scalar('Accuracy/test', 100.*correct/total, epoch)
         print(f'********** Epoch {epoch} of {max_epochs} -- Test Loss: {test_loss/(batch_idx+1):.3f}, Test Acc: {100.*correct/total:.3f} **********')
 
         # Save checkpoint.
@@ -229,9 +194,7 @@ def run_training(datasettype='cifar10',modeltype='resnet18',pretrained_base=Fals
 
 if __name__=='__main__':
     models = ['resnet34']
-    # models = ['resnet50']
-    seeds = [100]
-    # seeds = [1]
+    seeds = [1]
     datasets = ['cifar10']
     for d in datasets:
         for m in models:
