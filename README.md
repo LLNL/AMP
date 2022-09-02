@@ -21,8 +21,8 @@ The tarball containing checkpoints already preserves this directory structure, a
 ### Training your own anchored model
 Converting an existing network to work with anchoring is very easy and can be done as follows:
 ```
-from .utils.models import ResNet34 #import any CNN model to train
-from AnchoringModel import ANT
+from lib.utils.models import ResNet34 #import any CNN model to train
+from lib.AnchoringModel import ANT
 
 net = ResNet34(nc=6,num_classes=10) #only modification is input has 2x channels as usual, so nc = 6.
 anchored_net = ANT(net) #everything else remains unchanged
