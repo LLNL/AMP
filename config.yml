@@ -5,28 +5,28 @@ data:
   n_workers: 2
 
   in_dataset:
-    cifar10: "/p/lustre1/anirudh1/delta/pytorch/classification/CIFAR/pytorch-cifar/data/"
-    cifar100: "/p/lustre1/anirudh1/delta/pytorch/classification/CIFAR/pytorch-cifar/data/"
+    cifar10: "path-to-cifar10-data/"
+    cifar100: "path-to-cifar100-data/"
 
   ood_benchmark:
-    svhn: "/p/lustre1/anirudh1/delta/pytorch/classification/CIFAR/pytorch-cifar/data/SVHN-dataset"
-    imagenet_r: "/p/lustre1/anirudh1/delta/pytorch/classification/OOD/odin/data/Imagenet_resize/"
-    imagenet: "/p/lustre1/anirudh1/delta/pytorch/classification/OOD/odin/data/Imagenet/"
-    lsun: "/p/lustre1/anirudh1/delta/pytorch/classification/OOD/odin/data/LSUN/"
-    lsun_r: "/p/lustre1/anirudh1/delta/pytorch/classification/OOD/odin/data/LSUN_resize/"
-    texture:  "/usr/workspace/anirudh1/delUQ/data/images/texture/"
-    places365:  "/usr/workspace/anirudh1/delUQ/data/images/places365"
-    isun: "/p/lustre1/anirudh1/delta/pytorch/classification/OOD/odin/data/iSUN/"
+    svhn: "path/ood/data"
+    imagenet_r: "path/ood/data"
+    imagenet: "path/ood/data"
+    lsun: "path/ood/data"
+    lsun_r: "path/ood/data"
+    texture:  "path/ood/data"
+    places365:  "path/ood/data"
+    isun: "path/ood/data"
 
   resizing_benchmark:
-    bicubic:  "/usr/workspace/anirudh1/delUQ/LSUN_resize/pil/bicubic"
-    bilinear: "/usr/workspace/anirudh1/delUQ/LSUN_resize/pil/bilinear"
-    lanczos:  "/usr/workspace/anirudh1/delUQ/LSUN_resize/pil/lanczos"
-    nearest:  "/usr/workspace/anirudh1/delUQ/LSUN_resize/pil/nearest"
-    lsun_native:  "/usr/workspace/anirudh1/delUQ/data/images/lsun"
+    bicubic:  "resize_ood/bicubic"
+    bilinear: "resize_ood/bilinear"
+    lanczos:  "resize_ood/lanczos"
+    nearest:  "resize_ood/nearest"
+    lsun_native:  "path/to/original/lsun"
 
   scood_benchmark:
-    root: "/usr/workspace/anirudh1/delUQ/data/"
+    root: "point/to/downloaded/scood/benchmark/here"
 
 models:
   ckpt_save: "./chkpts/"
