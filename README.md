@@ -49,11 +49,12 @@ We provide easy bash scripts to reproduce different tables/figures in the paper.
 ### Citation
 If you use this code, please consider citing our paper as follows:
 ```
-@article{anirudh2022out,
+@inproceedings{anirudh2022out,
   title={Out of Distribution Detection via Neural Network Anchoring},
   author={Anirudh, Rushil and Thiagarajan, Jayaraman J},
-  journal={arXiv preprint arXiv:2207.04125},
-  year={2022}
+  booktitle={Asian Conference on Machine Learning (ACML)},
+  year={2022},
+  organization={PMLR}
 }
 
 ```
