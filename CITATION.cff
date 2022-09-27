@@ -1,8 +1,11 @@
 cff-version: 1.2.0
 authors:
-  - family-names: Anirudh, Thiagarajan
-    given-names: Rushil, Jayaraman J.
+  - family-names: "Anirudh"
+    given-names: "Rushil"
+- family-names: "Thiagarajan"
+    given-names: "Jayaraman J."
 title: "AMP OOD Detection"
 version: 0.1
 doi: 
 date-released: 2022-09-01
+url: https://github.com/LLNL/AMP
