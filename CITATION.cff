@@ -1,9 +1,9 @@
 cff-version: 1.2.0
 authors:
-  - family-names: "Anirudh"
-    given-names: "Rushil"
+- family-names: "Anirudh"
+  given-names: "Rushil"
 - family-names: "Thiagarajan"
-    given-names: "Jayaraman J."
+  given-names: "Jayaraman J."
 title: "AMP OOD Detection"
 version: 0.1
 doi: 
