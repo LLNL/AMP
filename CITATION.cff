@@ -17,7 +17,7 @@ preferred-citation:
   - family-names: "Thiagarajan"
     given-names: "Jayaraman J."
   title: "Out of Distribution Detection via Neural Network Anchoring"
-  booktitle: "Asian Conference on Machine Learning (ACML)"
+  conference: "Asian Conference on Machine Learning (ACML)"
   title: "Out of Distribution Detection via Neural Network Anchoring"
   year: 2022
   organization: "PMLR"
