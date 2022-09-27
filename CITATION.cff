@@ -11,6 +11,7 @@ date-released: 2022-09-01
 url: https://github.com/LLNL/AMP
 preferred-citation:
   type: article
+  authors:
   - family-names: "Anirudh"
     given-names: "Rushil"
   - family-names: "Thiagarajan"
