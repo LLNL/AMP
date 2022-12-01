@@ -44,21 +44,28 @@ class ANT(nn.Module):
         if anchors is None:
             anchors = x[torch.randperm(n_img),:,:,:]
 
-        ## make anchors (n_anchors) --> n_img*n_anchors
-        ids = np.random.choice(anchors.shape[0],n_anchors, replace=False)
-        A = torch.repeat_interleave(anchors[ids,:,:,:],n_img,dim=0)
 
-        # alternatively you can just randomly sample the batch as below:
-        # A = anchors[torch.randint(anchors.shape[0],(n_img*n_anchors,)),:]
+        ## make anchors (n_anchors) --> n_img*n_anchors
+        A = anchors[torch.randint(anchors.shape[0],(n_img*n_anchors,)),:]
+        # ids = np.random.choice(anchors.shape[0],n_anchors, replace=False)
+        # A = torch.repeat_interleave(anchors[ids,:,:,:],n_img,dim=0)
+        
 
         if corrupt:
             refs = self.txs(A)
         else:
             refs = A
         ## before computing residual, make minibatch (n_img) --> n_img* n_anchors
-        diff = x.tile((n_anchors,1,1,1)) - A
+        
+        if len(x.shape)<=2:
+            diff = x.tile((n_anchors,1)) - refs
+        else:
+            diff = x.tile((n_anchors,1,1,1)) - refs
+
         batch = torch.cat([refs,diff],axis=1)
+
         return batch
+
 
     def calibrate(self,mu,sig):
         '''
