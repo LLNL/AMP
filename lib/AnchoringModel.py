@@ -58,9 +58,9 @@ class ANT(nn.Module):
         ## before computing residual, make minibatch (n_img) --> n_img* n_anchors
         
         if len(x.shape)<=2:
-            diff = x.tile((n_anchors,1)) - refs
+            diff = x.tile((n_anchors,1)) - A
         else:
-            diff = x.tile((n_anchors,1,1,1)) - refs
+            diff = x.tile((n_anchors,1,1,1)) - A
 
         batch = torch.cat([refs,diff],axis=1)
 
