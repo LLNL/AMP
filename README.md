@@ -5,7 +5,7 @@ Code and models for [`Out of Distribution Detection with Neural Network Anchorin
 ### Dependencies
 This package was built and tested using
 * Python `3.7.9`
-* Pytorch `1.11.0`
+* Pytorch `1.13.1`
 * Torchvision `0.12.0`
 * Numpy `1.19.2`
 
